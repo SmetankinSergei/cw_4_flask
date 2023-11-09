@@ -1,0 +1,68 @@
+form {
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 15px;
+}
+
+.source {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.source input {
+    width: 20px
+}
+
+.keyword, .pages, .top {
+    display: flex;
+    flex-direction: column;
+}
+
+.keyword label, .pages label, .top label {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.keyword input, .pages input, .top input {
+    margin-bottom: 20px;
+    width: 200px;
+    height: 30px;
+    padding-left: 10px;
+    border-radius: 8px;
+}
+
+.inputs, .buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button button{
+    width: 200px;
+    height: 30px;
+    background: #56c5fb;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.button button {
+    background: #56c5fb;
+}
+
+.button button:hover  {
+    background: #a4daf5;
+}
+
+.error {
+    text-align: center;
+    margin-top: 15px;
+    color: red;
+    font-weight: 600;
+}
+
+.vacancies {
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 15px;
+}
