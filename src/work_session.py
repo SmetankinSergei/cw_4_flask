@@ -1,6 +1,7 @@
 import json
 
 from src import constants
+from src.session_actions import SessionActions
 from src.site_discovers import HeadHunterDiscover, SuperJobDiscover
 from src.vacancy import Vacancy
 
@@ -17,13 +18,13 @@ class WorkSession:
 
     def get_vacancies(self, action, source_name, keyword, page=0, top_count=5):
         """Единственный метод публичного интерфейса, управляющий приложением"""
-        if action == 'all':
+        if action == SessionActions.ALL:
             self.__get_all_vacancies(source_name, keyword, page)
             return [vacancy.get_info() for vacancy in self.__vacancies]
-        elif action == 'top':
+        elif action == SessionActions.TOP:
             vacancies = self.__get_top_vacancies(source_name, keyword, int(page), int(top_count))
             return [vacancy.get_info() for vacancy in vacancies]
-        elif action == 'save':
+        elif action == SessionActions.SAVE:
             self.__save_vacancies(source_name, keyword, int(page))
 
     def __save_vacancies(self, source_name, keyword, page=0):

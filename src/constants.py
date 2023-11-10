@@ -1,6 +1,7 @@
 import os.path
 
 from src import app_state
+from src.session_actions import SessionActions
 from src.vacancy import Vacancy
 
 SUPER_JOB_API_KEY = 'v3.r.14216812.e35a2982d38760093d08dff919349fab3d562f98.8a79d5d5f172c17a070222e85ad5b899893db71c'
@@ -56,3 +57,7 @@ TEST_VACANCY_INFO = {
                     'url': 'https://py_dev.com',
                     'requirements': 'Full stack'
                     }
+
+SESSION_ACTIONS = {'all': SessionActions.ALL,
+                   'top': SessionActions.TOP,
+                   'save': SessionActions.SAVE}
