@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Site discover{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+
+{% block body %}
+    <form class="settings" method="post">
+        <div class="source">
+            <input type="radio" name="source_choice" id="hh" value="hh" checked/>
+            <label for="hh">HeadHunter</label>
+            <input type="radio" name="source_choice" id="sj" value="sj"/>
+            <label for="sj">SuperJob</label>
+        </div>
+
+        <div class="inputs">
+            <div class="keyword">
+                <label>Keyword</label>
+                <input type="text" name="keyword"/>
+            </div>
+
+            <div class="pages">
+                <label>Pages amount</label>
+                <input type="text" name="pages_amount" placeholder="numbers only"/>
+            </div>
+
+            <div class="top">
+                <label>Top vacancies amount</label>
+                <input type="text" name="top_amount" placeholder="numbers only"/>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <div class="button"><button type="submit" name="action" value="all">Show all vacancies</button></div>
+            <div class="button"><button type="submit" name="action" value="top">Show top vacancies</button></div>
+            <div class="button"><button type="submit" name="action" value="save">Save vacancies to file</button></div>
+        </div>
+    </form>
+
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <div class="vacancies">
+        {% if vacancies %}
+            {% for vacancy in vacancies %}
+                {{ vacancy['name'] }}<br>
+                {{ vacancy['salary'] }}<br>
+                <a class="link" href="{{ vacancy['url'] }}" target="_blank">{{ vacancy['url'] }}</a><br>
+                {{ vacancy['requirements'] }}<br>
+                <br>
+                <br>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}

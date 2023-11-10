@@ -1,0 +1,45 @@
+body, header, footer, input {
+    margin: 0 auto;
+    max-width: 700px;
+    font-weight: 600;
+	font-family: "Open Sans", sans-serif;
+}
+
+header {
+	font-size: 44px;
+    background: #56c5fb;
+    height: 70px;
+    position: absolute;
+    left: auto;
+    position: fixed;
+    width: 100%;
+    top: 0px;
+}
+
+.main_name, .footer_text {
+    padding-top: 10px;
+    text-align: center;
+}
+
+a:link, a:active, a:visited {
+    color: #000000;
+}
+
+footer {
+    background: #899196;
+    height: 70px;
+    position: absolute;
+    left: auto;
+    position: fixed;
+    width: 100%;
+    bottom: 0px;
+}
+
+.body_bg {
+    background: #f3f3f3;
+    min-height: 100%;
+}
+
+.top_correction, .bottom_correction {
+    height: 70px;
+}
