@@ -1,4 +1,5 @@
 class Vacancy:
+    """Класс для создания вакансий из данных"""
     def __init__(self, name, url, salary, requirements):
         self.__name = name
         self.__url = url
@@ -10,9 +11,11 @@ class Vacancy:
 
     @property
     def salary(self):
+        """Геттер для зарплаты"""
         return self.__salary
 
     def get_info(self):
+        """Получение подробной информации в виде словаря"""
         info = {
                 'name': self.__name,
                 'salary': self.__salary,
