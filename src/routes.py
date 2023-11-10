@@ -3,6 +3,7 @@ from flask import render_template, request
 import main
 from main import app
 from src.checks import check_data
+from src.constants import SESSION_ACTIONS
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -13,8 +14,9 @@ def home():
         keyword = request.form.get('keyword')
         pages_amount = request.form.get('pages_amount')
         top_amount = request.form.get('top_amount')
-        action = request.form.get('action')
+        action_request = request.form.get('action')
         if check_data(source, keyword, pages_amount, top_amount):
+            action = SESSION_ACTIONS[action_request]
             vacancies = main.work_session.get_vacancies(action, source, keyword, pages_amount, top_amount)
             return render_template('index.html', vacancies=vacancies)
         else:
