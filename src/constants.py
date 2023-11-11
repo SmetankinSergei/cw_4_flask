@@ -1,6 +1,5 @@
 import os.path
 
-from src import app_state
 from src.session_actions import SessionActions
 from src.vacancy import Vacancy
 
