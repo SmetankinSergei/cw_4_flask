@@ -12,41 +12,39 @@ class WorkSession:
         self.__hh_discover = HeadHunterDiscover()
         self.__sj_discover = SuperJobDiscover()
         self.__vacancies = []
+        self.__top_count = 0
         self.__dao = main_dao
         self.__sources = {constants.HH: self.__hh_discover,
                           constants.SJ: self.__sj_discover}
+        self.__actions = {SessionActions.ALL: self.__get_all_vacancies,
+                          SessionActions.TOP: self.__get_top_vacancies,
+                          SessionActions.SAVE: self.__save_vacancies}
 
-    def get_vacancies(self, action, source_name, keyword, page=0, top_count=5):
+    def get_vacancies(self, action, source_name, keyword, page, top_count):
         """Единственный метод публичного интерфейса, управляющий приложением"""
-        if action == SessionActions.ALL:
-            self.__get_all_vacancies(source_name, keyword, page)
-            return [vacancy.get_info() for vacancy in self.__vacancies]
-        elif action == SessionActions.TOP:
-            vacancies = self.__get_top_vacancies(source_name, keyword, int(page), int(top_count))
-            return [vacancy.get_info() for vacancy in vacancies]
-        elif action == SessionActions.SAVE:
-            self.__save_vacancies(source_name, keyword, int(page))
+        self.__top_count = int(top_count)
+        return self.__actions[action](source_name, keyword, page)
 
-    def __save_vacancies(self, source_name, keyword, page=0):
+    def __save_vacancies(self, source_name, keyword, page):
         """Сохранение данных в файл"""
         self.__get_vacancies(source_name, keyword, page)
         if self.__vacancies:
             data = [vacancy.get_info() for vacancy in self.__vacancies]
             self.__dao.save_to_json(data)
 
-    def __get_all_vacancies(self, source_name, keyword, page=0):
+    def __get_all_vacancies(self, source_name, keyword, page):
         """Получение данных по всем вакансиям"""
         self.__get_vacancies(source_name, keyword, page)
-        return self.__vacancies
+        return [vacancy.get_info() for vacancy in self.__vacancies]
 
-    def __get_top_vacancies(self, source_name, keyword, page=0, top_count=5):
+    def __get_top_vacancies(self, source_name, keyword, page, top_count=5):
         """Получение данных по самым высокооплачиваемым вакансиям"""
         self.__get_vacancies(source_name, keyword, page)
         vacancies = self.__compare_vacancies_by_salary()
-        vacancies = vacancies[:top_count]
-        return vacancies
+        vacancies = vacancies[:self.__top_count]
+        return [vacancy.get_info() for vacancy in vacancies]
 
-    def __get_vacancies(self, source_name, keyword, page=0):
+    def __get_vacancies(self, source_name, keyword, page):
         """Создание вакансий из данных ответа сервера"""
         source = self.__sources.get(source_name, self.__hh_discover)
         vacancies = source.get_request(keyword, page)
