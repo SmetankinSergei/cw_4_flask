@@ -3,6 +3,7 @@ from src.constants import PATH_TO_TEST_JSON
 from src.dao import DAO
 from src.session_actions import SessionActions
 from src.work_session import WorkSession
+
 """В интернете холивар по поводу тестов приватных методов. В Java кто-то делает через рефлексию, тут, я думаю, 
 можно через искажение имён, но я придерживаюсь мнения, что тестировать нужно публичные методы всё же, и как показали 
 изыскания в сети, это самое распространённое мнение"""
