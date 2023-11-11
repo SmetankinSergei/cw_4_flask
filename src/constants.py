@@ -20,7 +20,7 @@ ITEMS_NAMES = {HH: {'vacancies': 'items',
                     'requirements': 'candidat'}}
 
 PATH_TO_JSON = os.path.join('..', 'data', 'data.json')
-PATH_TO_TEST_JSON = os.path.join('tests', 'data.json')
+PATH_TO_TEST_JSON = os.path.join('data.json')
 
 TEST_VACANCIES = [
     {'name': 'Backend разработчик',
